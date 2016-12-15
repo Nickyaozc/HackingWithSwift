@@ -26,9 +26,9 @@ class ViewController: UIViewController {
         button2.layer.borderWidth = 1
         button3.layer.borderWidth = 1
         
-        button1.layer.borderColor = UIColor.lightGrayColor().CGColor
-        button2.layer.borderColor = UIColor.lightGrayColor().CGColor
-        button3.layer.borderColor = UIColor.lightGrayColor().CGColor
+        button1.layer.borderColor = UIColor.lightGray.cgColor
+        button2.layer.borderColor = UIColor.lightGray.cgColor
+        button3.layer.borderColor = UIColor.lightGray.cgColor
         
         countries += ["estonia", "france", "germany", "ireland", "italy", "monaco", "nigeria", "poland", "russia", "spain", "uk", "us"]
         
@@ -36,7 +36,7 @@ class ViewController: UIViewController {
         
     }
     
-    @IBAction func buttonTapped(sender: UIButton) {
+    @IBAction func buttonTapped(_ sender: UIButton) {
         var title: String
 
         if sender.tag == correctAnswer {
@@ -47,21 +47,21 @@ class ViewController: UIViewController {
             score -= 1
         }
         
-        let ac = UIAlertController(title: title, message: "your score is \(score)", preferredStyle: .Alert)
-        ac.addAction(UIAlertAction(title: "continue", style: .Default, handler: askQuestion))
-        presentViewController(ac, animated: true, completion: nil)
+        let ac = UIAlertController(title: title, message: "your score is \(score)", preferredStyle: .alert)
+        ac.addAction(UIAlertAction(title: "continue", style: .default, handler: askQuestion))
+        present(ac, animated: true, completion: nil)
     }
     
     
-    func askQuestion(action: UIAlertAction! = nil) {
-        countries = GKRandomSource.sharedRandom().arrayByShufflingObjectsInArray(countries) as! [String]
+    func askQuestion(_ action: UIAlertAction! = nil) {
+        countries = GKRandomSource.sharedRandom().arrayByShufflingObjects(in: countries) as! [String]
         
-        button1.setImage(UIImage(named:countries[0]), forState: .Normal)
-        button2.setImage(UIImage(named:countries[1]), forState: .Normal)
-        button3.setImage(UIImage(named:countries[2]), forState: .Normal)
+        button1.setImage(UIImage(named:countries[0]), for: UIControlState())
+        button2.setImage(UIImage(named:countries[1]), for: UIControlState())
+        button3.setImage(UIImage(named:countries[2]), for: UIControlState())
    
-        correctAnswer = GKRandomSource.sharedRandom().nextIntWithUpperBound(3)
-        title = countries[correctAnswer].uppercaseString
+        correctAnswer = GKRandomSource.sharedRandom().nextInt(upperBound: 3)
+        title = countries[correctAnswer].uppercased()
     
     }
     
